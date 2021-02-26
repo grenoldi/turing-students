@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.Map;
 
 public class LoginScreen implements ActionListener {
@@ -20,12 +21,10 @@ public class LoginScreen implements ActionListener {
     private Menu menu;
 
     public LoginScreen(Map map){
-
         loginFrame = new JFrame(String.format("%s", map.get("loginScreenTitle")));
         loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         loginFrame.setLocation(300,300);
         loginFrame.setSize(320,240);
-
 
         menu = new Menu(map, loginFrame);
 
@@ -82,6 +81,15 @@ public class LoginScreen implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == bClose){
             System.exit(0);
+        }
+        if(e.getSource() == bLogin){
+            //TODO: validate login
+            //code below is temporary, just to test the ui
+            if(tfUsername.getText().equals("professor")){
+
+                //new TeatcherUI(getLanguage());
+                loginFrame.dispatchEvent(new WindowEvent(loginFrame, WindowEvent.WINDOW_CLOSING));
+            }
         }
     }
 }
