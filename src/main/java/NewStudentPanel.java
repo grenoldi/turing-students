@@ -1,3 +1,4 @@
+import exceptions.NonEmptyFieldException;
 import io.joshworks.restclient.http.Unirest;
 import resources.LanguageMaps;
 
@@ -96,22 +97,47 @@ public class NewStudentPanel implements ActionListener {
         return this.mainPanel;
     }
 
-    public void registerStudent(){
+    public HttpResponse<String> registerStudent() throws NonEmptyFieldException {
+        String name,cpf, tel, street, uf, cep, number;
+        if(tfName.getText().isEmpty() ||
+           tfCPF.getText().isEmpty()  ||
+           tfTel.getText().isEmpty()  ){
+            throw new NonEmptyFieldException(String.format("%s",LanguageMaps.getCurrentStringMap(language).get("empty-field-error")));
+        }
+        else{
+            name = tfName.getText();
+            cpf = tfCPF.getText();
+            tel = tfTel.getText();
+            street = tfStreet.getText();
+            uf = tfUF.getText();
+            cep = tfCEP.getText();
+            number = tfNumber.getText();
 
+        }
         HttpResponse<String> response = (HttpResponse<String>) Unirest.post("http://localhost:8080/api/v1/alunos/")
                 .header("Content-Type", "application/json")
-                .body("{\n    \"marca\":\"ford\",\n    \"modelo\":\"fiesta\",\n    \"cor\":\"branco\",\n    \"combustivel\":\"flex\"\n}")
-                .asString();
+                .body(String.format("{\n    \"name\":\"%s\",\n    \"cpf\":\"%s\",\n    \"telefone\":\"%s\"\n}", name, cpf, tel));
+        return response;
     }
 
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bClose){
-            refToMainFrame.dispatchEvent(new WindowEvent(refToMainFrame, WindowEvent.WINDOW_CLOSING));
+            MainScreenUI.getFrame().dispatchEvent(new WindowEvent(MainScreenUI.getFrame(), WindowEvent.WINDOW_CLOSING));
         }
         if (e.getSource() == bSave){
-            //TODO: request api to save student
-            //Reminder: address data is optional, personal is not.
+
+            HttpResponse<String> httpResponse = null;
+            try {
+                httpResponse = registerStudent();
+            } catch (NonEmptyFieldException nonEmptyFieldException) {
+                nonEmptyFieldException.printStackTrace();
+                JOptionPane.showMessageDialog(new JFrame(),
+                        nonEmptyFieldException.getMessage(),
+                        String.format("s", LanguageMaps.getCurrentStringMap(language).get("error")),
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            System.out.println(httpResponse);
         }
     }
 }

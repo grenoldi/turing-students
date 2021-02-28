@@ -41,6 +41,8 @@ public class LanguageMaps {
         englishStringMap.put("number", "Number");
         englishStringMap.put("save", "Save");
         englishStringMap.put("personal-data", "Personal data");
+        englishStringMap.put("empty-field-error", "Required field must not be blank.");
+        englishStringMap.put("error", "Error");
     }
 
     private void setPortugeseStringMap() {
@@ -69,6 +71,8 @@ public class LanguageMaps {
         portugueseStringMap.put("number", "Numero");
         portugueseStringMap.put("save", "Salvar");
         portugueseStringMap.put("personal-data", "Dados pessoais");
+        portugueseStringMap.put("empty-field-error","Campo obrigatório não pode estar vazio.");
+        portugueseStringMap.put("error", "Erro");
     }
 
     public static Map getPortugueseStringMap(){

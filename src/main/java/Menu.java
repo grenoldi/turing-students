@@ -23,8 +23,8 @@ public class Menu implements ActionListener {
         mNew = new JMenu(String.format("%s", map.get("new")));
         open = new JMenu(String.format("%s", map.get("open")));
 
-        ImageIcon ptbrIcon = new ImageIcon(getClass().getResource("resources/img/bra_flag_25_x_24.jpg"));
-        ImageIcon enusIcon = new ImageIcon(getClass().getResource("resources/img/usa_flag_25_x_25.jpg"));
+        ImageIcon ptbrIcon = new ImageIcon(getClass().getResource("img/bra_flag_25_x_24.jpg"));
+        ImageIcon enusIcon = new ImageIcon(getClass().getResource("img/usa_flag_25_x_25.jpg"));
 
         mLanguagePtBr = new JMenuItem();
         mLanguagePtBr.setIcon(ptbrIcon);
