@@ -7,11 +7,12 @@ import java.awt.event.WindowEvent;
 import java.util.Map;
 
 public class Menu implements ActionListener {
+    private MainScreenUI refToMainScreen;
     private JFrame refToMainFrame;
     private JMenuBar menuBar;
     private JMenu file, mNew, open, help;
     private JMenuItem student, grade, close, about, iHelp, mLanguagePtBr, mLanguageEnUS;
-    private String language = LanguageMaps.PT_BR;
+    private static String language = LanguageMaps.PT_BR;
 
     public Menu(Map map, JFrame frame){
         refToMainFrame= frame;
@@ -33,6 +34,12 @@ public class Menu implements ActionListener {
         mLanguageEnUS.setIcon(enusIcon);
         mLanguageEnUS.addActionListener(this);
 
+        student= new JMenuItem(String.format("%s", map.get("student")));
+        student.addActionListener(this);
+
+        grade = new JMenuItem(String.format("%s", map.get("grade")));
+        grade.addActionListener(this);
+
         close = new JMenuItem(String.format("%s", map.get("close")));
         close.addActionListener(this);
 
@@ -42,6 +49,10 @@ public class Menu implements ActionListener {
         iHelp = new JMenuItem(String.format("%s", map.get("help")));
         iHelp.addActionListener(this);
 
+        mNew.add(student);
+        mNew.add(grade);
+
+        file.add(mNew);
         file.add(open);
         file.addSeparator();
         file.add(close);
@@ -64,20 +75,29 @@ public class Menu implements ActionListener {
         file.revalidate();
         file.repaint();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == close){
             refToMainFrame.dispatchEvent(new WindowEvent(refToMainFrame, WindowEvent.WINDOW_CLOSING));
         }
+
         if (e.getSource() == mLanguageEnUS){
             this.language = LanguageMaps.EN_US;
             System.out.println("Hello");
             setFileText(LanguageMaps.getEnglishStringMap());
         }
+
         if (e.getSource() == mLanguagePtBr){
             this.language = LanguageMaps.PT_BR;
             System.out.println("Oi");
             setFileText(LanguageMaps.getPortugueseStringMap());
+        }
+
+        if(e.getSource() == student){
+            NewStudentPanel ns = new NewStudentPanel(MainScreenUI.getLanguage(), refToMainFrame);
+            MainScreenUI.setMainPanel(ns.getMainPanel());
+            MainScreenUI.getFrame().setTitle(String.format("%s - %s", MainScreenUI.getFrame().getTitle(), LanguageMaps.getCurrentStringMap(language).get("new-student")));
         }
     }
 }

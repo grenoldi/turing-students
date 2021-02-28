@@ -26,7 +26,7 @@ public class Student {
         this.status= Status.PENDING;
     }
 
-    public Student(Longid, String n, String cpf, String tel, String st, String uf, String cep, int num){
+    public Student(Long id, String n, String cpf, String tel, String st, String uf, String cep, int num){
         this.id = id;
         this.name = n;
         this.cpf = cpf;

@@ -17,6 +17,8 @@ public class LanguageMaps {
 
     private void setEnglishStringMap() {
         englishStringMap.put("greeting", "hello");
+        englishStringMap.put("turing", "Turing Academy");
+        englishStringMap.put("new-student", "New student");
         englishStringMap.put("file", "File");
         englishStringMap.put("help", "Help");
         englishStringMap.put("new", "New");
@@ -29,10 +31,22 @@ public class LanguageMaps {
         englishStringMap.put("login", "Login");
         englishStringMap.put("username", "Username");
         englishStringMap.put("password", "Password");
+        englishStringMap.put("name", "Name");
+        englishStringMap.put("social","Social ID");
+        englishStringMap.put("telephone","Telephone number");
+        englishStringMap.put("address" , "Address");
+        englishStringMap.put("street", "Street");
+        englishStringMap.put("uf","UF");
+        englishStringMap.put("zip-code","Zip code");
+        englishStringMap.put("number", "Number");
+        englishStringMap.put("save", "Save");
+        englishStringMap.put("personal-data", "Personal data");
     }
 
     private void setPortugeseStringMap() {
         portugueseStringMap.put("greeting","oi");
+        portugueseStringMap.put("turing", "Academia Turing");
+        portugueseStringMap.put("new-student", "Novo aluno");
         portugueseStringMap.put("file", "Arquivo");
         portugueseStringMap.put("help", "Ajuda");
         portugueseStringMap.put("new", "Novo");
@@ -45,6 +59,16 @@ public class LanguageMaps {
         portugueseStringMap.put("login", "Login");
         portugueseStringMap.put("username", "Usuário");
         portugueseStringMap.put("password", "Senha");
+        portugueseStringMap.put("name", "Nome");
+        portugueseStringMap.put("social","CPF");
+        portugueseStringMap.put("telephone","Telefone");
+        portugueseStringMap.put("address" , "Endereço");
+        portugueseStringMap.put("street", "Rua");
+        portugueseStringMap.put("uf","UF");
+        portugueseStringMap.put("zip-code","CEP");
+        portugueseStringMap.put("number", "Numero");
+        portugueseStringMap.put("save", "Salvar");
+        portugueseStringMap.put("personal-data", "Dados pessoais");
     }
 
     public static Map getPortugueseStringMap(){
@@ -53,5 +77,11 @@ public class LanguageMaps {
 
     public static Map getEnglishStringMap(){
         return englishStringMap;
+    }
+
+    public static Map getCurrentStringMap(String language){
+        if (language.equals(LanguageMaps.PT_BR)) return portugueseStringMap;
+        if (language.equals(LanguageMaps.EN_US)) return englishStringMap;
+        return null;
     }
 }
